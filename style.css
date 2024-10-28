@@ -1,0 +1,1026 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap'); 
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --bg-color: #fdfdfd;
+    --text-color: #333;
+    --main-color: #0080FF;
+    --white-color: #fdfdfd;
+    --shadow-color: rgba(0, 0, 0, .2);
+    --blue-color: #007bff;
+    --light-blue: #e0f7fa;
+    --dark-blue: #0056b3;
+}
+
+html {
+    font-size: 62.5%; /* 1rem = 10px; sehingga lebih mudah menghitung */
+    overflow-x: hidden;
+    scroll-behavior: smooth; /* Efek scroll halus untuk semua tautan */
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    cursor: url('cursor.png'), auto; /* Custom cursor for the entire body */
+}
+
+img:hover,
+        button:hover {
+            transform: scale(1.1); /* Slightly enlarge images and buttons on hover */
+            transition: transform 0.2s ease; /* Smooth transition */
+        }
+        
+
+       /* Mengatur gaya untuk loading screen */
+        .loading {
+            display: flex;
+            align-items: center;  /* Vertikal center */
+            justify-content: center;  /* Horizontal center */
+            height: 100vh;  /* Full height of viewport */
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            color: #333;  /* Ganti warna teks sesuai kebutuhan */
+            position: fixed; /* Agar tetap di posisi saat scroll */
+            top: 0; 
+            left: 0; 
+            width: 100%; /* Mengisi seluruh lebar layar */
+            background-color: white; /* Latar belakang loader */
+            z-index: 1000; /* Pastikan di atas konten lain */
+        }
+
+/* Mengatur gaya untuk loading screen */
+        .loading {
+            display: flex;
+            align-items: center;  /* Vertikal center */
+            justify-content: center;  /* Horizontal center */
+            height: 100vh;  /* Full height of viewport */
+            font-family: Arial, sans-serif;
+            font-size: 24px;
+            color: #333;  /* Ganti warna teks sesuai kebutuhan */
+            position: fixed; /* Agar tetap di posisi saat scroll */
+            top: 0; 
+            left: 0; 
+            width: 100%; /* Mengisi seluruh lebar layar */
+            background-color: white; /* Latar belakang loader */
+            z-index: 1000; /* Pastikan di atas konten lain */
+        }
+
+        /* Gaya untuk loader */
+        .loader {
+            border: 8px solid #f3f3f3; /* Warna latar belakang */
+            border-top: 8px solid #3498db; /* Warna putaran */
+            border-radius: 50%;
+            width: 50px; /* Ukuran loader */
+            height: 50px; /* Ukuran loader */
+            animation: spin 1s linear infinite; /* Animasi putar */
+            margin-right: 10px; /* Jarak antara loader dan teks */
+        }
+
+        /* Animasi putar loader */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Tampilan teks loading dengan efek kursor */
+        #loading-text {
+            white-space: nowrap;  /* Jangan membungkus teks */
+            overflow: hidden;  /* Sembunyikan teks yang melampaui batas */
+            border-right: 3px solid; /* Kursor kedip */
+            width: auto; /* Lebar teks akan dinamis */
+            animation: typing 2s steps(10) forwards, blink 0.5s step-end infinite alternate; /* Ketikan dan kedip */
+            display: inline-block; /* Pastikan teks ditampilkan dalam blok inline */
+        }
+
+        /* Efek mengetik */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: auto; } /* Mengisi lebar otomatis */
+        }
+
+        /* Efek kedipan kursor */
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Menambahkan CSS untuk menyesuaikan jarak elemen */
+        .loading p {
+            margin: 0; /* Menghapus margin default */
+        }
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 7%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    transition: .5s;
+}
+
+.header.sticky {
+    background: var(--white-color);
+    box-shadow: 0 .1rem 1rem var(--shadow-color);
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: var(--main-color);
+    font-weight: 600;
+    cursor: default;
+    margin-right: auto;
+}
+
+
+
+#darkMode-icon {
+    font-size: 2.4rem;
+    color: var(--white-color);
+    cursor: pointer;
+}
+
+#darkMode-icon:hover {
+transform: scale(1.2);
+}
+
+/* Dark mode styles */
+body.dark-mode {
+background-color: #2c2c2c;
+    color: #f1f1f1;
+}
+
+.header.sticky #darkMode-icon {
+    color: var(--text-color);
+    opacity: .9;
+}
+
+.section {
+    min-height: 100vh;
+    padding: 10rem 7% 2rem;
+}
+
+.home {
+    position: relative; /* Pastikan elemen induk memiliki posisi relatif */
+    display: flex; /* Menggunakan flexbox untuk tata letak */
+    align-items: center; /* Menyelaraskan konten secara vertikal */
+    justify-content: space-between; /* Menyebar konten secara merata */
+    flex-wrap: wrap; /* Responsif pada perangkat kecil */
+    margin: 2rem 0; /* Jarak antar bagian */
+}
+
+.home-img {
+    flex: 1; /* Biarkan gambar tumbuh sesuai ruang yang tersedia */
+    max-width: 300px; /* Lebar maksimum untuk gambar */
+    height: auto; /* Tinggi otomatis agar proporsional */
+    pointer-events: none; /* Menjaga interaksi pointer */
+}
+
+.about {
+    display: flex; /* Menggunakan flexbox untuk tata letak */
+    align-items: center; /* Menyelaraskan konten secara vertikal */
+    justify-content: center; /* Menyelaraskan konten secara horizontal */
+    flex-wrap: wrap; /* Responsif pada perangkat kecil */
+    margin-top: 40px; /* Jarak antara section */
+}
+
+.about-img {
+    flex: 1; /* Biarkan gambar tumbuh sesuai ruang yang tersedia */
+    max-width: 400px; /* Lebar maksimum untuk gambar */
+    height: auto; /* Tinggi otomatis agar proporsional */
+}
+
+.about-content {
+    max-width: 500px; /* Lebar maksimum konten */
+    text-align: center; /* Memusatkan teks */
+    margin: 0 20px; /* Jarak samping untuk konten */
+}
+
+.home .home-content {
+    max-width: 44rem;
+}
+
+.home-content h3 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    line-height: .3;
+}
+
+.home-content h1 {
+    font-size: 4.6rem;
+    font-weight: 700;
+    margin-bottom: .3rem;
+}
+
+.home-content p {
+    font-size: 1.6rem;
+}
+
+.home-content .sosial-media a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background: transparent;
+    border: .2rem solid var(--main-color);
+    border-radius: 50%;
+    box-shadow: 0 .2rem .5rem var(--shadow-color);
+    font-size: 2rem;
+    color: var(--main-color);
+    margin: 2.5rem 1.5rem 3rem 0;
+    transition: .5s ease;
+}
+
+.home-content .sosial-media a:hover {
+    background: var(--main-color);
+    color: var(--white-color);
+} 
+
+.btn {
+    display: inline-block;
+    padding: 1.2rem 2.8rem;
+    background: var(--main-color);
+    border-radius: .6rem;
+    box-shadow: 0 .2rem .5rem var(--shadow-color);
+    font-size: 1.6rem;
+    color: var(--white-color);
+    letter-spacing: .1rem;
+    font-weight: 600;                                                                  
+    border: .2rem solid transparent;
+    transition: .5s ease;
+}
+
+.btn:hover {
+    background: transparent;
+    color: var(--main-color);
+    border-color: var(--main-color);
+}
+
+.home .profession-container {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 768px;
+    height: 768px;
+    pointer-events: none;
+}
+
+.home .profession-container .profession-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 768px;
+    height: 768px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home .profession-box .profession {
+    left: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: var(--main-color);
+    transform: rotate(calc(360deg / 4 * var(--i))); 
+    transform-origin: 384px;
+    background: var(--bg-color);
+    padding: 13px 0;
+}
+
+.home .profession-box .profession:nth-child(1) i {
+    margin-right: 15px;
+}
+
+.home .profession-box .profession:nth-child(2),
+.home .profession-box .profession:nth-child(4) {
+    padding-bottom: 20px;
+}
+
+.home .profession i {
+    font-size: 3.8rem;
+}
+
+.home .profession h3 {
+    font-size: 3.2rem;
+    line-height: 1;
+    font-weight: 600;
+}
+
+.home .profession-box .circle {
+    width: 560px;
+    height: 560px;
+    border: 3px solid var(--main-color);
+    border-radius: 50%;
+}
+
+.home .profession-container .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-top: 384px solid var(--main-color);
+    border-right: 384px solid var(--main-color);
+    border-bottom: 384px solid var(--main-color);
+    border-left: 384px solid transparent;
+}
+
+.home {
+    position: relative; /* Pastikan elemen induk memiliki posisi relatif */
+    display: flex; /* Menggunakan flexbox untuk tata letak */
+    align-items: center; /* Menyelaraskan konten secara vertikal */
+} 
+
+.home-img {
+    position: absolute; /* Posisi absolute agar dapat diposisikan dengan tepat */
+    bottom: 0; /* Tempatkan gambar di bagian bawah */
+    right: 0; /* Tempatkan gambar di sisi kanan */
+    width: 40%; /* Atur lebar gambar menjadi 40% dari elemen induk */
+    height: auto; /* Biarkan tinggi otomatis agar proporsional */
+    max-width: 300px; /* Atur lebar maksimum untuk gambar */
+    pointer-events: none; /* Menjaga interaksi pointer */
+    z-index: 1; /* Pastikan gambar di atas elemen lain jika diperlukan */
+}
+
+span {
+    color: var(--main-color);
+}
+
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* Responsif pada perangkat kecil */
+}
+
+.about-img img {
+    width: 40vw;
+}
+
+.heading {
+    font-size: 4.5rem;
+    text-align: center;
+}
+
+.about-content h2 {
+    text-align: left;
+    line-height: 1.2;
+}
+
+.about-content h3 {
+    font-size: 2rem;
+}
+
+.about-content p {
+    font-size: 1.6rem;
+    margin: 2rem 0 3rem;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    
+    
+padding: 20px;
+    background: white;
+    border-radius: 5px;
+    
+   
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Basic styling */
+        .educational-background {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #333;
+        }
+        .school {
+            margin-bottom: 40px;
+            padding: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .map {
+            height: 200px;
+            width: 100%;
+            margin: 10px 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Styling the button */
+        .view-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        /* Hover effect */
+        .view-button:hover {
+            background-color: #0056e3;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Click animation effect */
+        .view-button:active {
+            transform: scale(0.95);
+            background-color: #0056b3;
+        }
+
+        /* Ripple effect */
+        .view-button::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: inherit;
+            transform: scale(0);
+            opacity: 0;
+            transition: transform 0.4s, opacity 0.4s;
+        }
+        .view-button:active::after {
+            transform: scale(3);
+            opacity: 1;
+            transition: 0s;
+        }
+/* Media Queries */
+@media (max-width: 768px) {
+    html {
+        font-size: 50%; /* Menurunkan ukuran font dasar di perangkat kecil */
+    }
+
+    .home-content h1 {
+        font-size: 3.2rem; /* Mengurangi ukuran font pada layar kecil */
+    }
+
+    .navbar a {
+        font-size: 1.5rem; /* Mengurangi ukuran font pada navbar */
+    }
+
+    .home-img {
+        width: 60%; /* Mengubah lebar gambar di perangkat kecil */
+        max-width: 200px; /* Mengubah lebar maksimum di perangkat kecil */
+    }
+
+    .header {
+        padding: 1.5rem 5%; /* Mengurangi padding header di perangkat kecil */
+    }
+
+.skills-section {
+            text-align: center;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap; /* Agar skill berada di samping */
+            justify-content: center; /* Pusatkan konten secara horizontal */
+        }
+
+        .skill {
+            display: flex;
+            flex-direction: column; /* Mengatur agar nama skill dan progress di bawah ikon */
+            align-items: center;
+            margin: 20px; /* Jarak antar skill */
+            width: 120px; /* Lebar tetap untuk setiap skill */
+            position: relative; /* Untuk posisi absolut level */
+        }
+
+        .progress-bar {
+            position: relative;
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: #007bff;
+            width: 0; /* Mulai dari 0 untuk animasi */
+            border-radius: 10px;
+            transition: width 2s ease; /* Transisi untuk perubahan lebar lebih lambat */
+        }
+
+        .level-indicator {
+            position: absolute;
+            top: -25px; /* Posisi di atas skill */
+            right: -30px; /* Posisi di kanan */
+            background-color: rgba(255, 255, 255, 0.9); /* Latar belakang putih transparan */
+            border: 2px solid rgba(0, 123, 255, 0.8); /* Border biru transparan */
+            border-radius: 50%; /* Bentuk bulat */
+            width: 50px; /* Ukuran lingkaran */
+            height: 50px; /* Ukuran lingkaran */
+            display: flex; /* Untuk memusatkan teks */
+            align-items: center; /* Vertikal center */
+            justify-content: center; /* Horizontal center */
+            font-weight: bold;
+            font-size: 14px; /* Ukuran font level */
+            opacity: 0; /* Mulai dengan tidak terlihat */
+            transition: opacity 1s ease; /* Transisi untuk opacity */
+            pointer-events: none; /* Agar tidak bisa diklik */
+        }
+
+        .skill-icon {
+            width: 50px; /* Ukuran ikon */
+            height: 50px; /* Ukuran ikon */
+            cursor: pointer; /* Cursor pointer saat hover */
+        }
+ 
+ .portfolio-section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.portfolio-section h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.project-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.project {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.project:hover {
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.project-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.project-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.4);
+}
+
+.project-image:hover img {
+    transform: scale(1.05);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 123, 0.7);
+    opacity: 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+    border-radius: 12px;
+}
+
+.project:hover .overlay {
+    opacity: 1;
+}
+
+.overlay h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.overlay p {
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056e3;
+    transform: scale(1.05);
+}
+ 
+.contact-section {
+    max-width: 600px;
+    margin: 20px; /* Untuk memberikan sedikit jarak dari tepi */
+    padding: 30px;
+    background-color: var(--white-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.8s ease;
+    position: relative;
+    overflow: hidden; /* Untuk menyembunyikan latar belakang animasi */
+}
+
+.contact-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.1), transparent);
+    animation: pulse 3s infinite;
+    z-index: 0; /* Menempatkan di belakang elemen lainnya */
+    border-radius: 8px;
+}
+
+.contact-section h1 {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1; /* Membawa teks di atas latar belakang animasi */
+}
+
+p {
+    text-align: center;
+    margin-bottom: 30px;
+    z-index: 1;
+    position: relative;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--dark-blue);
+    border-radius: 4px;
+    transition: border 0.3s;
+}
+
+input:focus, textarea:focus {
+    border-color: var(--blue-color);
+    outline: none;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--blue-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    position: relative;
+    overflow: hidden; /* Untuk menangani efek ripple */
+}
+
+.submit-button:hover {
+    background-color: var(--dark-blue);
+}
+
+.submit-button:active {
+    transform: scale(0.95);
+}
+
+.submit-button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: ripple 0.6s linear forwards;
+    opacity: 0;
+}
+
+.success-message {
+    display: none;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    color: #3c763d;
+    border-radius: 4px;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes ripple {
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .project-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 991px){
+    html{
+        font-size: 55%;
+    }
+
+    body.active{
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 450px){
+    html{
+        font-size: 50%;
+    }
+
+    .header.active{
+        padding-top: 7rem;
+    }
+
+    #menu-btn.fa-times{
+        right: 0;
+    }
+    .home .image img{
+        height: auto;
+        width: 100%;
+    }
+}
+
+
+
+/* Add the CSS styles here (or in your external CSS file) */
+
+        /* Gaya untuk pesan sukses dan ucapan terima kasih */
+        #success-message, #thank-you {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2em;
+            color: green;
+            opacity: 0;
+            z-index: 10;
+        }
+
+        /* Efek animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Efek sukses */
+        #success-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        /* Efek ucapan terima kasih */
+        #thank-you.show {
+            display: block;
+            color: #007bff;
+            font-size: 1.5em;
+            font-weight: bold;
+            animation: scaleUp 1s ease, fadeIn 1.2s ease-in-out forwards;
+        }
+        
+footer {
+    position: relative;
+    background-color: #1E90FF; /* Warna latar belakang biru */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    overflow: hidden; /* Mencegah elemen keluar dari footer */
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2; /* Pastikan konten footer di atas hujan dan petir */
+    opacity: 0;
+    animation: fadeIn 10s forwards; /* Tambahkan animasi fade in */
+}
+
+.scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: none;
+            background-color: var(--main-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-to-top.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .scroll-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        .scroll-to-top:hover i {
+            animation: rotateIcon 0.6s ease;
+        }
+
+        @keyframes rotateIcon {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .scroll-to-top {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px;
+                font-size: 16px;
+            }
+        }
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Agar hujan tidak mengganggu interaksi */
+}
+
+@keyframes rain {
+    to {
+        transform: translateY(100vh); /* Hujan jatuh sampai bagian bawah viewport */
+    }
+}
+
+.drop {
+    position: absolute;
+    width: 2px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.6);
+    animation: rain linear infinite;
+}
+
+/* Animasi Petir */
+.lightning {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Agar petir tidak mengganggu interaksi */
+    z-index: 1; /* Pastikan petir di bawah konten footer */
+}
+
+@keyframes flash {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+.flash {
+    animation: flash 0.2s ease-in-out forwards;
+}
+
+/* Styling untuk petir berbentuk S */
+.lightning-strike {
+    position: absolute;
+    width: 6px; /* Lebar petir */
+    height: 60px; /* Tinggi petir */
+    background-color: white; /* Warna petir */
+    clip-path: polygon(0 0, 100% 0, 80% 20%, 100% 40%, 80% 60%, 100% 100%, 0 100%, 20% 80%, 0 60%, 20% 40%); /* Membentuk petir seperti huruf S */
+}
+
+/* Responsif untuk ukuran layar yang lebih kecil */
+@media (max-width: 600px) {
+    .drop {
+        width: 1.5px; /* Lebar butir hujan lebih kecil */
+        height: 8px; /* Tinggi butir hujan lebih kecil */
+    }
+}
